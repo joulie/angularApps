@@ -20,12 +20,40 @@ app.get('/produits', (req, res) => {
 
 // Ajouter un produit
 app.post('/produits', (req, res) => {
-  const { nom, quantite } = req.body;
-  db.query('INSERT INTO produits (nom, quantite) VALUES (?, ?)', [nom, quantite], (err, result) => {
+  const {
+    nom,
+    prenom,
+    site,
+    code_projet,
+    nom_projet,
+    type_materiel,
+    detail_materiel,
+    num_serie
+  } = req.body;
+
+  db.query(
+    `INSERT INTO produits 
+      (nom, prenom, site, code_projet, nom_projet, type_materiel, detail_materiel, num_serie) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [nom, prenom, site, code_projet, nom_projet, type_materiel, detail_materiel, num_serie],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({ message: 'Erreur serveur' });
+      } else {
+        res.status(201).json({ message: 'Produit ajouté', id: result.insertId });
+      }
+    }
+  );
+});
+
+// Supprimer un produit
+app.delete('/produits/:id', (req, res) => {
+  const id = req.params.id;
+  db.query('DELETE FROM produits WHERE id = ?', [id], (err) => {
     if (err) {
       res.status(500).json({ message: 'Erreur serveur' });
     } else {
-      res.status(201).json({ message: 'Produit ajouté', id: result.insertId }); // <-- Réponse JSON
+      res.status(200).json({ message: 'Produit supprimé' });
     }
   });
 });

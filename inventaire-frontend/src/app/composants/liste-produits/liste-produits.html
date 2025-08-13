@@ -7,27 +7,67 @@
 
   <form *ngIf="afficherForm" (ngSubmit)="ajouterProduit()" class="mb-4 row g-2 align-items-end">
     <div class="col-auto">
-      <input type="text" class="form-control" placeholder="Nom du produit" [(ngModel)]="nom" name="nom" required>
+      <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="nom" name="nom" >
     </div>
     <div class="col-auto">
-      <input type="number" class="form-control" placeholder="Quantité" [(ngModel)]="quantite" name="quantite" required>
+      <input type="text" class="form-control" placeholder="Prénom" [(ngModel)]="prenom" name="prenom">
+    </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" placeholder="Site" [(ngModel)]="site" name="site">
+    </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" placeholder="Code projet" [(ngModel)]="code_projet" name="code_projet">
+    </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" placeholder="Nom projet" [(ngModel)]="nom_projet" name="nom_projet">
+    </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" placeholder="Type matériel" [(ngModel)]="type_materiel" name="type_materiel">
+    </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" placeholder="Détail matériel" [(ngModel)]="detail_materiel" name="detail_materiel">
+    </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" placeholder="Numéro de série" [(ngModel)]="num_serie" name="num_serie">
     </div>
     <div class="col-auto">
       <button type="submit" class="btn btn-success">Valider</button>
     </div>
   </form>
 
+  <div *ngIf="messageErreur" class="alert alert-danger" role="alert">
+    {{ messageErreur }}
+  </div>
+
   <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
-        <th scope="col">Nom</th>
-        <th scope="col" class="text-center">Quantité</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Site</th>
+        <th>Code projet</th>
+        <th>Nom projet</th>
+        <th>Type matériel</th>
+        <th>Détail matériel</th>
+        <th>Numéro de série</th>
+        <th>Actions</th> <!-- Nouvelle colonne -->
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let produit of produits; let i = index" [ngClass]="{'table-secondary': i % 2 === 0, 'table-light': i % 2 !== 0}">
         <td class="align-middle"><strong>{{ produit.nom }}</strong></td>
-        <td class="text-center align-middle">{{ produit.quantite }}</td>
+        <td class="align-middle">{{ produit.prenom }}</td>
+        <td class="align-middle">{{ produit.site }}</td>
+        <td class="align-middle">{{ produit.code_projet }}</td>
+        <td class="align-middle">{{ produit.nom_projet }}</td>
+        <td class="align-middle">{{ produit.type_materiel }}</td>
+        <td class="align-middle">{{ produit.detail_materiel }}</td>
+        <td class="align-middle">{{ produit.num_serie }}</td>
+        <td class="align-middle text-center">
+          <button class="btn btn-danger btn-sm" (click)="supprimerProduit(produit.id)">
+            Supprimer
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

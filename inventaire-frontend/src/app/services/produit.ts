@@ -12,7 +12,11 @@ export class Produit {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  ajouterProduit(nom: string, quantite: number): Observable<any> {
-    return this.http.post(this.apiUrl, { nom, quantite });
+  ajouterProduit(produit: any): Observable<any> {
+    return this.http.post(this.apiUrl, produit);
+  }
+
+  supprimerProduit(id: number) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
