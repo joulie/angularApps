@@ -1,14 +1,13 @@
 <div class="container mt-5">
   <h1 class="text-center mb-4" style="font-weight: 300;">
     Product List View
-    
-    
   </h1>
   <div class="card">
     <div class="card-header bg-light">
       <strong>Product List</strong>
       <span *ngIf="selectedRating !== null" class="ms-3 badge bg-info text-dark">
-      {{ selectedRating }} </span>
+        {{ selectedRating }}
+      </span>
     </div>
     <div class="card-body">
       <div class="row mb-3 align-items-center">
@@ -19,10 +18,13 @@
           <input class="form-control" [(ngModel)]="filter" placeholder=""/>
         </div>
       </div>
-      <button class="btn btn-primary mb-3">Show Image</button>
+      <button class="btn btn-primary mb-3" (click)="showImage = !showImage">
+        {{ showImage ? 'Hide Image' : 'Show Image' }}
+      </button>
       <table class="table">
         <thead>
           <tr>
+            <th *ngIf="showImage">Image</th>
             <th>Product</th>
             <th>Code</th>
             <th>Available</th>
@@ -32,6 +34,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let product of filteredProducts">
+            <td *ngIf="showImage">
+              <img *ngIf="product.image" [src]="product.image" alt="{{ product.productName }}" style="width: 50px; height: auto;">
+            </td>
             <td>
               <a href="#" class="text-primary">{{ product.productName }}</a>
             </td>
