@@ -13,6 +13,7 @@ export class ProductList implements OnInit {
   products: any[] = [];
   showImage = false;
   filter = '';
+  selectedRating: number | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -30,6 +31,7 @@ export class ProductList implements OnInit {
   }
 
   onRatingClick(rating: number) {
+    this.selectedRating = rating;
     console.log(`the rating ${rating} was clicked`);
   }
 }
