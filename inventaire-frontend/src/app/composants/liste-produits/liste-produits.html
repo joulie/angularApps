@@ -55,17 +55,63 @@
     </thead>
     <tbody>
       <tr *ngFor="let produit of produits; let i = index" [ngClass]="{'table-secondary': i % 2 === 0, 'table-light': i % 2 !== 0}">
-        <td class="align-middle"><strong>{{ produit.nom }}</strong></td>
-        <td class="align-middle">{{ produit.prenom }}</td>
-        <td class="align-middle">{{ produit.site }}</td>
-        <td class="align-middle">{{ produit.code_projet }}</td>
-        <td class="align-middle">{{ produit.nom_projet }}</td>
-        <td class="align-middle">{{ produit.type_materiel }}</td>
-        <td class="align-middle">{{ produit.detail_materiel }}</td>
-        <td class="align-middle">{{ produit.num_serie }}</td>
+        <td class="align-middle">
+          <ng-container *ngIf="ligneEnEdition === produit.id; else nomDisplay">
+            <input [(ngModel)]="produit.nom" class="form-control" />
+          </ng-container>
+          <ng-template #nomDisplay>{{ produit.nom }}</ng-template>
+        </td>
+        <td class="align-middle">
+          <ng-container *ngIf="ligneEnEdition === produit.id; else prenomDisplay">
+            <input [(ngModel)]="produit.prenom" class="form-control" />
+          </ng-container>
+          <ng-template #prenomDisplay>{{ produit.prenom }}</ng-template>
+        </td>
+        <td class="align-middle">
+          <ng-container *ngIf="ligneEnEdition === produit.id; else siteDisplay">
+            <input [(ngModel)]="produit.site" class="form-control" />
+          </ng-container>
+          <ng-template #siteDisplay>{{ produit.site }}</ng-template>
+        </td>
+        <td class="align-middle">
+          <ng-container *ngIf="ligneEnEdition === produit.id; else codeProjetDisplay">
+            <input [(ngModel)]="produit.code_projet" class="form-control" />
+          </ng-container>
+          <ng-template #codeProjetDisplay>{{ produit.code_projet }}</ng-template>
+        </td>
+        <td class="align-middle">
+          <ng-container *ngIf="ligneEnEdition === produit.id; else nomProjetDisplay">
+            <input [(ngModel)]="produit.nom_projet" class="form-control" />
+          </ng-container>
+          <ng-template #nomProjetDisplay>{{ produit.nom_projet }}</ng-template>
+        </td>
+        <td class="align-middle">
+          <ng-container *ngIf="ligneEnEdition === produit.id; else typeMaterielDisplay">
+            <input [(ngModel)]="produit.type_materiel" class="form-control" />
+          </ng-container>
+          <ng-template #typeMaterielDisplay>{{ produit.type_materiel }}</ng-template>
+        </td>
+        <td class="align-middle">
+          <ng-container *ngIf="ligneEnEdition === produit.id; else detailMaterielDisplay">
+            <input [(ngModel)]="produit.detail_materiel" class="form-control" />
+          </ng-container>
+          <ng-template #detailMaterielDisplay>{{ produit.detail_materiel }}</ng-template>
+        </td>
+        <td class="align-middle">
+          <ng-container *ngIf="ligneEnEdition === produit.id; else numSerieDisplay">
+            <input [(ngModel)]="produit.num_serie" class="form-control" />
+          </ng-container>
+          <ng-template #numSerieDisplay>{{ produit.num_serie }}</ng-template>
+        </td>
         <td class="align-middle text-center">
-          <button class="btn btn-warning btn-sm me-2" (click)="editerProduit(produit)">Modifier</button>
-          <button class="btn btn-danger btn-sm" (click)="supprimerProduit(produit.id)">Supprimer</button>
+          <ng-container *ngIf="ligneEnEdition === produit.id; else actionsDisplay">
+            <button class="btn btn-success btn-sm me-2" (click)="validerEdition(produit)">Valider</button>
+            <button class="btn btn-secondary btn-sm" (click)="annulerEdition()">Annuler</button>
+          </ng-container>
+          <ng-template #actionsDisplay>
+            <button class="btn btn-warning btn-sm me-2" (click)="ligneEnEdition = produit.id">Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="supprimerProduit(produit.id)">Supprimer</button>
+          </ng-template>
         </td>
       </tr>
     </tbody>

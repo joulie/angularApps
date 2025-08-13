@@ -24,6 +24,8 @@ export class ListeProduits implements OnInit {
   num_serie = '';
 
   produitEnEdition: any = null;
+  ligneEnEdition: number | null = null;
+  copieProduit: any = {};
 
   constructor(private produitService: Produit) {}
 
@@ -86,6 +88,23 @@ export class ListeProduits implements OnInit {
     }
   }
 
+  validerEdition(produit: any) {
+    // Optionnel : vérifie que le nom n'est pas vide
+    if (!produit.nom || produit.nom.trim() === '') {
+      this.messageErreur = 'Le nom est obligatoire.';
+      return;
+    }
+    this.messageErreur = '';
+    this.produitService.modifierProduit(produit.id, produit).subscribe({
+      next: () => {
+        this.produitService.getProduits().subscribe(data => {
+          this.produits = data;
+        });
+        this.ligneEnEdition = null;
+      }
+    });
+  }
+
   annulerEdition() {
     this.nom = '';
     this.prenom = '';
@@ -97,6 +116,12 @@ export class ListeProduits implements OnInit {
     this.num_serie = '';
     this.afficherForm = false;
     this.produitEnEdition = null;
+    this.ligneEnEdition = null;
+    this.messageErreur = '';
+    // Optionnel : recharger la liste pour annuler les modifs locales
+    this.produitService.getProduits().subscribe(data => {
+      this.produits = data;
+    });
   }
 
   supprimerProduit(id: number) {
