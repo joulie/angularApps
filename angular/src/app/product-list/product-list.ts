@@ -28,4 +28,8 @@ export class ProductList implements OnInit {
       p.productName?.toLowerCase().includes(this.filter.toLowerCase())
     );
   }
+
+  onRatingClick(rating: number) {
+    console.log(`the rating ${rating} was clicked`);
+  }
 }

@@ -34,11 +34,15 @@
             <td>${{ product.price }}</td>
             <td>
               <span *ngFor="let star of [1,2,3,4,5]; let i = index">
-                <i class="fa" [ngClass]="{
-                  'fa-star': product.rating >= i+1,
-                  'fa-star-half-o': product.rating > i && product.rating < i+1,
-                  'fa-star-o': product.rating < i+1
-                }"></i>
+                <i class="fa"
+                   [ngClass]="{
+                     'fa-star': product.rating >= i+1,
+                     'fa-star-half-o': product.rating > i && product.rating < i+1,
+                     'fa-star-o': product.rating < i+1
+                   }"
+                   style="cursor:pointer"
+                   (click)="onRatingClick(product.rating)">
+                </i>
               </span>
             </td>
           </tr>
