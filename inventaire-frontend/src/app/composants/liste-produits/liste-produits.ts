@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Produit } from '../../services/produit';
-import { NgFor } from '@angular/common';
+import { NgFor, NgClass } from '@angular/common'; // <-- Ajoute NgClass
 
 @Component({
   selector: 'app-liste-produits',
   templateUrl: './liste-produits.html',
   styleUrl: './liste-produits.css',
-  imports: [NgFor]
+  imports: [NgFor, NgClass] // <-- Ajoute NgClass ici
 })
 export class ListeProduits implements OnInit {
   produits: any[] = [];

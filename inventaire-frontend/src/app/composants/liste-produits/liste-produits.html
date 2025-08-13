@@ -1,5 +1,17 @@
-<ul>
-  <li *ngFor="let produit of produits">
-    {{ produit.nom }} ({{ produit.quantite }})
-  </li>
-</ul>
+<div class="container mt-5">
+  <h2 class="mb-4">Liste des produits</h2>
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col" class="text-center">Quantité</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produit of produits; let i = index" [ngClass]="{'table-secondary': i % 2 === 0, 'table-light': i % 2 !== 0}">
+        <td class="align-middle"><strong>{{ produit.nom }}</strong></td>
+        <td class="text-center align-middle">{{ produit.quantite }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
