@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -24,9 +23,9 @@ app.post('/produits', (req, res) => {
   const { nom, quantite } = req.body;
   db.query('INSERT INTO produits (nom, quantite) VALUES (?, ?)', [nom, quantite], (err, result) => {
     if (err) {
-      res.status(500).send('Erreur serveur');
+      res.status(500).json({ message: 'Erreur serveur' });
     } else {
-      res.status(201).send('Produit ajouté');
+      res.status(201).json({ message: 'Produit ajouté', id: result.insertId }); // <-- Réponse JSON
     }
   });
 });

@@ -1,5 +1,22 @@
 <div class="container mt-5">
   <h2 class="mb-4">Liste des produits</h2>
+
+  <button class="btn btn-primary mb-3" (click)="afficherForm = !afficherForm">
+    {{ afficherForm ? 'Annuler' : 'Ajouter un produit' }}
+  </button>
+
+  <form *ngIf="afficherForm" (ngSubmit)="ajouterProduit()" class="mb-4 row g-2 align-items-end">
+    <div class="col-auto">
+      <input type="text" class="form-control" placeholder="Nom du produit" [(ngModel)]="nom" name="nom" required>
+    </div>
+    <div class="col-auto">
+      <input type="number" class="form-control" placeholder="Quantité" [(ngModel)]="quantite" name="quantite" required>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-success">Valider</button>
+    </div>
+  </form>
+
   <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
