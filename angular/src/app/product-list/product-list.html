@@ -2,6 +2,11 @@
   <h1 class="text-center mb-4" style="font-weight: 300;">
     Product List View
   </h1>
+  <div class="text-center mb-3">
+    <a routerLink="/produits" class="btn btn-outline-secondary">
+      Aller à la page produits
+    </a>
+  </div>
   <div class="card">
     <div class="card-header bg-light">
       <strong>Product List</strong>
@@ -18,9 +23,35 @@
           <input class="form-control" [(ngModel)]="filter" placeholder=""/>
         </div>
       </div>
+      <button class="btn btn-primary mb-3 me-2" (click)="showAddForm = !showAddForm">
+        {{ showAddForm ? 'Annuler' : 'Add Product' }}
+      </button>
       <button class="btn btn-primary mb-3" (click)="showImage = !showImage">
         {{ showImage ? 'Hide Image' : 'Show Image' }}
       </button>
+      <div *ngIf="showAddForm" class="mb-3 row g-2 align-items-end">
+        <div class="col">
+          <input class="form-control" [(ngModel)]="newProduct.productName" placeholder="Product Name">
+        </div>
+        <div class="col">
+          <input class="form-control" [(ngModel)]="newProduct.code" placeholder="Code">
+        </div>
+        <div class="col">
+          <input class="form-control" [(ngModel)]="newProduct.available" placeholder="Available">
+        </div>
+        <div class="col">
+          <input class="form-control" type="number" [(ngModel)]="newProduct.price" placeholder="Price">
+        </div>
+        <div class="col">
+          <input class="form-control" type="number" step="0.1" [(ngModel)]="newProduct.rating" placeholder="Rating">
+        </div>
+        <div class="col">
+          <input class="form-control" [(ngModel)]="newProduct.image" placeholder="Image URL">
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-success" (click)="addProduct()">Ajouter</button>
+        </div>
+      </div>
       <table class="table">
         <thead>
           <tr>
@@ -30,31 +61,72 @@
             <th>Available</th>
             <th>Price</th>
             <th>5 Star Rating</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let product of filteredProducts">
+            <!-- Image -->
             <td *ngIf="showImage">
               <img *ngIf="product.image" [src]="product.image" alt="{{ product.productName }}" style="width: 50px; height: auto;">
             </td>
+            <!-- Product Name -->
             <td>
-              <a href="#" class="text-primary">{{ product.productName }}</a>
+              <ng-container *ngIf="product.id === editingId; else displayName">
+                <input [(ngModel)]="editCache.productName" class="form-control form-control-sm" />
+              </ng-container>
+              <ng-template #displayName>{{ product.productName }}</ng-template>
             </td>
-            <td>{{ product.code }}</td>
-            <td>{{ product.available }}</td>
-            <td>${{ product.price }}</td>
+            <!-- Code -->
             <td>
-              <span *ngFor="let star of [1,2,3,4,5]; let i = index">
-                <i class="fa"
-                   [ngClass]="{
-                     'fa-star': product.rating >= i+1,
-                     'fa-star-half-o': product.rating > i && product.rating < i+1,
-                     'fa-star-o': product.rating < i+1
-                   }"
-                   style="cursor:pointer"
-                   (click)="onRatingClick(product.rating)">
-                </i>
-              </span>
+              <ng-container *ngIf="product.id === editingId; else displayCode">
+                <input [(ngModel)]="editCache.code" class="form-control form-control-sm" />
+              </ng-container>
+              <ng-template #displayCode>{{ product.code }}</ng-template>
+            </td>
+            <!-- Available -->
+            <td>
+              <ng-container *ngIf="product.id === editingId; else displayAvailable">
+                <input [(ngModel)]="editCache.available" class="form-control form-control-sm" />
+              </ng-container>
+              <ng-template #displayAvailable>{{ product.available }}</ng-template>
+            </td>
+            <!-- Price -->
+            <td>
+              <ng-container *ngIf="product.id === editingId; else displayPrice">
+                <input [(ngModel)]="editCache.price" type="number" class="form-control form-control-sm" />
+              </ng-container>
+              <ng-template #displayPrice>${{ product.price }}</ng-template>
+            </td>
+            <!-- Rating -->
+            <td>
+              <ng-container *ngIf="product.id === editingId; else displayRating">
+                <input [(ngModel)]="editCache.rating" type="number" step="0.1" class="form-control form-control-sm" />
+              </ng-container>
+              <ng-template #displayRating>
+                <span *ngFor="let star of [1,2,3,4,5]; let i = index">
+                  <i class="fa"
+                     [ngClass]="{
+                       'fa-star': product.rating >= i+1,
+                       'fa-star-half-o': product.rating > i && product.rating < i+1,
+                       'fa-star-o': product.rating < i+1
+                     }"
+                     style="cursor:pointer"
+                     (click)="onRatingClick(product.rating)">
+                  </i>
+                </span>
+              </ng-template>
+            </td>
+            <!-- Actions -->
+            <td>
+              <ng-container *ngIf="product.id === editingId; else actionButtons">
+                <button class="btn btn-success btn-sm me-2" (click)="saveEdit(product.id)">Valider</button>
+                <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Annuler</button>
+              </ng-container>
+              <ng-template #actionButtons>
+                <button class="btn btn-warning btn-sm me-2" (click)="editProduct(product)">Modifier</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Supprimer</button>
+              </ng-template>
             </td>
           </tr>
         </tbody>

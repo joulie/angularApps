@@ -7,7 +7,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-liste-produits',
   templateUrl: './liste-produits.html',
   styleUrl: './liste-produits.css',
-  imports: [NgFor, NgClass, NgIf, FormsModule]
+  imports: [NgFor, NgClass, NgIf, FormsModule],
+  standalone: true
 })
 export class ListeProduits implements OnInit {
   produits: any[] = [];
