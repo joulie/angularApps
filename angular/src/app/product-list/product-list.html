@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-4" style="font-weight: 300;">Product List View</h1>
+  <div class="card">
+    <div class="card-header bg-light">
+      <strong>Product List</strong>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3 align-items-center">
+        <div class="col-auto">
+          <label class="form-label mb-0">Filter by:</label>
+        </div>
+        <div class="col">
+          <input class="form-control" [(ngModel)]="filter" placeholder=""/>
+        </div>
+      </div>
+      <button class="btn btn-primary mb-3">Show Image</button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th>Price</th>
+            <th>5 Star Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of filteredProducts">
+            <td>
+              <a href="#" class="text-primary">{{ product.productName }}</a>
+            </td>
+            <td>{{ product.code }}</td>
+            <td>{{ product.available }}</td>
+            <td>${{ product.price }}</td>
+            <td>
+              <span *ngFor="let star of [1,2,3,4,5]; let i = index">
+                <i class="fa" [ngClass]="{
+                  'fa-star': product.rating >= i+1,
+                  'fa-star-half-o': product.rating > i && product.rating < i+1,
+                  'fa-star-o': product.rating < i+1
+                }"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
