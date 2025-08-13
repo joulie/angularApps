@@ -23,6 +23,8 @@ export class ListeProduits implements OnInit {
   detail_materiel = '';
   num_serie = '';
 
+  produitEnEdition: any = null;
+
   constructor(private produitService: Produit) {}
 
   ngOnInit(): void {
@@ -31,39 +33,71 @@ export class ListeProduits implements OnInit {
     });
   }
 
-  ajouterProduit() {
-  if (!this.nom || this.nom.trim() === '') {
-    this.messageErreur = 'Le nom est obligatoire.';
-    return;
+  editerProduit(produit: any) {
+    this.produitEnEdition = { ...produit };
+    this.afficherForm = true;
+    this.nom = produit.nom;
+    this.prenom = produit.prenom;
+    this.site = produit.site;
+    this.code_projet = produit.code_projet;
+    this.nom_projet = produit.nom_projet;
+    this.type_materiel = produit.type_materiel;
+    this.detail_materiel = produit.detail_materiel;
+    this.num_serie = produit.num_serie;
   }
-  this.messageErreur = '';
-  const produit = {
-    nom: this.nom,
-    prenom: this.prenom,
-    site: this.site,
-    code_projet: this.code_projet,
-    nom_projet: this.nom_projet,
-    type_materiel: this.type_materiel,
-    detail_materiel: this.detail_materiel,
-    num_serie: this.num_serie
-  };
-  this.produitService.ajouterProduit(produit).subscribe({
-    next: () => {
-      this.produitService.getProduits().subscribe(data => {
-        this.produits = data;
-      });
-      this.nom = '';
-      this.prenom = '';
-      this.site = '';
-      this.code_projet = '';
-      this.nom_projet = '';
-      this.type_materiel = '';
-      this.detail_materiel = '';
-      this.num_serie = '';
-      this.afficherForm = false;
+
+  ajouterProduit() {
+    if (!this.nom || this.nom.trim() === '') {
+      this.messageErreur = 'Le nom est obligatoire.';
+      return;
     }
-  });
-}
+    this.messageErreur = '';
+    const produit = {
+      nom: this.nom,
+      prenom: this.prenom,
+      site: this.site,
+      code_projet: this.code_projet,
+      nom_projet: this.nom_projet,
+      type_materiel: this.type_materiel,
+      detail_materiel: this.detail_materiel,
+      num_serie: this.num_serie
+    };
+
+    if (this.produitEnEdition && this.produitEnEdition.id) {
+      // Modification
+      this.produitService.modifierProduit(this.produitEnEdition.id, produit).subscribe({
+        next: () => {
+          this.produitService.getProduits().subscribe(data => {
+            this.produits = data;
+          });
+          this.annulerEdition();
+        }
+      });
+    } else {
+      // Ajout
+      this.produitService.ajouterProduit(produit).subscribe({
+        next: () => {
+          this.produitService.getProduits().subscribe(data => {
+            this.produits = data;
+          });
+          this.annulerEdition();
+        }
+      });
+    }
+  }
+
+  annulerEdition() {
+    this.nom = '';
+    this.prenom = '';
+    this.site = '';
+    this.code_projet = '';
+    this.nom_projet = '';
+    this.type_materiel = '';
+    this.detail_materiel = '';
+    this.num_serie = '';
+    this.afficherForm = false;
+    this.produitEnEdition = null;
+  }
 
   supprimerProduit(id: number) {
     this.produitService.supprimerProduit(id).subscribe(() => {

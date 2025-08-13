@@ -50,7 +50,7 @@
         <th>Type matériel</th>
         <th>Détail matériel</th>
         <th>Numéro de série</th>
-        <th>Actions</th> <!-- Nouvelle colonne -->
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -64,9 +64,8 @@
         <td class="align-middle">{{ produit.detail_materiel }}</td>
         <td class="align-middle">{{ produit.num_serie }}</td>
         <td class="align-middle text-center">
-          <button class="btn btn-danger btn-sm" (click)="supprimerProduit(produit.id)">
-            Supprimer
-          </button>
+          <button class="btn btn-warning btn-sm me-2" (click)="editerProduit(produit)">Modifier</button>
+          <button class="btn btn-danger btn-sm" (click)="supprimerProduit(produit.id)">Supprimer</button>
         </td>
       </tr>
     </tbody>

@@ -19,4 +19,8 @@ export class Produit {
   supprimerProduit(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  modifierProduit(id: number, produit: any) {
+    return this.http.put(`${this.apiUrl}/${id}`, produit);
+  }
 }

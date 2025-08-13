@@ -58,6 +58,33 @@ app.delete('/produits/:id', (req, res) => {
   });
 });
 
+// Modifier un produit
+app.put('/produits/:id', (req, res) => {
+  const id = req.params.id;
+  const {
+    nom,
+    prenom,
+    site,
+    code_projet,
+    nom_projet,
+    type_materiel,
+    detail_materiel,
+    num_serie
+  } = req.body;
+
+  db.query(
+    `UPDATE produits SET nom=?, prenom=?, site=?, code_projet=?, nom_projet=?, type_materiel=?, detail_materiel=?, num_serie=? WHERE id=?`,
+    [nom, prenom, site, code_projet, nom_projet, type_materiel, detail_materiel, num_serie, id],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({ message: 'Erreur serveur' });
+      } else {
+        res.status(200).json({ message: 'Produit modifié' });
+      }
+    }
+  );
+});
+
 app.listen(3000, () => {
   console.log('Serveur Node.js lancé sur http://localhost:3000');
 });
