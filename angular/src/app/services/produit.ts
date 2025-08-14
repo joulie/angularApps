@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class Produit {
-  private apiUrl = 'http://localhost:3000/produits';
+  private apiUrl = 'http://localhost:3000/assignments';
 
   constructor(private http: HttpClient) {}
 
-  getProduits(): Observable<any[]> {
+  getAssignments(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 

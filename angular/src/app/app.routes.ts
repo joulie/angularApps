@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { ListeProduits } from './composants/liste-produits/liste-produits';
-import { ProductList } from './product-list/product-list';
-import { Menu } from './components/menu/menu';
+import { Assignments } from './components/assignments/assignments';
+import { ProductList } from './components/product-list/product-list';
+import { Menu } from './components/navigation/menu/menu';
 import { NodeCommandes } from './components/node-commandes/node-commandes';
-import { MesBdd } from './components/mes-bdd/mes-bdd';
-import { MesBddStructure } from './components/mes-bdd-structure/mes-bdd-structure';
-import { MesBddUtilisateurs } from './components/mes-bdd-utilisateurs/mes-bdd-utilisateurs';
-import { MesBddDonnees } from './components/mes-bdd-donnees/mes-bdd-donnees';
+import { MesBdd } from './components/navigation/menu/underMenu/mes-bdd/mes-bdd';
+import { MesBddStructure } from './components/navigation/menu/underMenu/mes-bdd/mes-bdd-structure/mes-bdd-structure';
+import { MesBddUtilisateurs } from './components/navigation/menu/underMenu/mes-bdd/mes-bdd-utilisateurs/mes-bdd-utilisateurs';
+import { MesBddDonnees } from './components/navigation/menu/underMenu/mes-bdd/mes-bdd-donnees/mes-bdd-donnees';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'produits', pathMatch: 'full' }, 
-  { path: 'produits', component: ListeProduits },
+  { path: '', redirectTo: 'assignments', pathMatch: 'full' }, 
+  { path: 'assignments', component: Assignments },
   { path: 'product-list', component: ProductList },
   { path: 'menu', component: Menu },
   { path: 'node-commandes', component: NodeCommandes },

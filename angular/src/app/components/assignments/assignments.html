@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <h2 class="mb-4">Liste des produits</h2>
+  <h2 class="mb-4">Liste des assignments</h2>
 
   <button class="btn btn-primary mb-3" (click)="afficherForm = !afficherForm">
     {{ afficherForm ? 'Annuler' : 'Ajouter un produit' }}
@@ -54,7 +54,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let produit of produits; let i = index" >
+      <tr *ngFor="let produit of assignments; let i = index" >
         <td class="align-middle">
           <ng-container *ngIf="ligneEnEdition === produit.id; else nomDisplay">
             <input [(ngModel)]="produit.nom" class="form-control" />

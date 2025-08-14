@@ -3,8 +3,8 @@
     Product List View
   </h1>
   <!--<div class="text-center mb-3">
-    <a routerLink="/produits" class="btn btn-outline-secondary">
-      Aller à la page produits
+    <a routerLink="/assignments" class="btn btn-outline-secondary">
+      Aller à la page assignments
     </a>
   </div>-->
   <div class="card">
@@ -124,8 +124,8 @@
                 <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Annuler</button>
               </ng-container>
               <ng-template #actionButtons>
-                <button class="btn btn-warning btn-sm me-2" (click)="editProduct(product)">Modifier</button>
-                <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Supprimer</button>
+                <button class="btn btn-modifier" (click)="editProduct(product)">Modifier</button>
+                <button class="btn btn-supprimer" (click)="deleteProduct(product.id)">Supprimer</button>
               </ng-template>
             </td>
           </tr>

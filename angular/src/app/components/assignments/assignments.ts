@@ -4,14 +4,14 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-liste-produits',
-  templateUrl: './liste-produits.html',
-  styleUrl: './liste-produits.css',
+  selector: 'app-assignments',
+  templateUrl: './assignments.html',
+  styleUrl: './assignments.css',
   imports: [NgFor, NgIf, FormsModule], 
   standalone: true
 })
-export class ListeProduits implements OnInit {
-  produits: any[] = [];
+export class Assignments implements OnInit {
+  assignments: any[] = [];
   messageErreur = '';
 
   afficherForm = false;
@@ -28,11 +28,11 @@ export class ListeProduits implements OnInit {
   ligneEnEdition: number | null = null;
   copieProduit: any = {};
 
-  constructor(private produitService: Produit) {}
+  constructor(private assignmentservice: Produit) {}
 
   ngOnInit(): void {
-    this.produitService.getProduits().subscribe(data => {
-      this.produits = data;
+    this.assignmentservice.getAssignments().subscribe(data => {
+      this.assignments = data;
     });
   }
 
@@ -68,20 +68,20 @@ export class ListeProduits implements OnInit {
 
     if (this.produitEnEdition && this.produitEnEdition.id) {
       // Modification
-      this.produitService.modifierProduit(this.produitEnEdition.id, produit).subscribe({
+      this.assignmentservice.modifierProduit(this.produitEnEdition.id, produit).subscribe({
         next: () => {
-          this.produitService.getProduits().subscribe(data => {
-            this.produits = data;
+          this.assignmentservice.getAssignments().subscribe(data => {
+            this.assignments = data;
           });
           this.annulerEdition();
         }
       });
     } else {
       // Ajout
-      this.produitService.ajouterProduit(produit).subscribe({
+      this.assignmentservice.ajouterProduit(produit).subscribe({
         next: () => {
-          this.produitService.getProduits().subscribe(data => {
-            this.produits = data;
+          this.assignmentservice.getAssignments().subscribe(data => {
+            this.assignments = data;
           });
           this.annulerEdition();
         }
@@ -96,10 +96,10 @@ export class ListeProduits implements OnInit {
       return;
     }
     this.messageErreur = '';
-    this.produitService.modifierProduit(produit.id, produit).subscribe({
+    this.assignmentservice.modifierProduit(produit.id, produit).subscribe({
       next: () => {
-        this.produitService.getProduits().subscribe(data => {
-          this.produits = data;
+        this.assignmentservice.getAssignments().subscribe(data => {
+          this.assignments = data;
         });
         this.ligneEnEdition = null;
       }
@@ -120,14 +120,14 @@ export class ListeProduits implements OnInit {
     this.ligneEnEdition = null;
     this.messageErreur = '';
     // Optionnel : recharger la liste pour annuler les modifs locales
-    this.produitService.getProduits().subscribe(data => {
-      this.produits = data;
+    this.assignmentservice.getAssignments().subscribe(data => {
+      this.assignments = data;
     });
   }
 
   supprimerProduit(id: number) {
-    this.produitService.supprimerProduit(id).subscribe(() => {
-      this.produits = this.produits.filter(p => p.id !== id);
+    this.assignmentservice.supprimerProduit(id).subscribe(() => {
+      this.assignments = this.assignments.filter(p => p.id !== id);
     });
   }
 }

@@ -1,0 +1,26 @@
+.btn-modifier {
+  background-color: #b7e4c7;
+  color: #155724;
+  border: none;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 6px 18px;
+  margin-right: 8px;
+  transition: background 0.2s;
+}
+.btn-modifier:hover {
+  background-color: #95d5b2;
+}
+
+.btn-supprimer {
+  background-color: #ffd6a5;
+  color: #a35d00;
+  border: none;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 6px 18px;
+  transition: background 0.2s;
+}
+.btn-supprimer:hover {
+  background-color: #ffb385;
+}
