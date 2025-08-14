@@ -1,0 +1,40 @@
+.active-link {
+  color: #a445ed;
+  font-weight: bold;
+  border-left: 3px solid #a445ed;
+  padding-left: 8px;
+  background: #f3e8fd;
+  border-radius: 4px;
+}
+
+.sous-menu-bdd, .sous-menu-bdd a {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+.sous-menu-bdd {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.sous-menu-bdd li {
+  margin-bottom: 12px;
+}
+
+.sous-menu-bdd a {
+  display: block;
+  color: #444;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 2px 0 2px 12px;
+  border-left: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
+}
+
+.sous-menu-bdd a.active-link {
+  color: #a445ed;
+  font-weight: 600;
+  border-left: 3px solid #a445ed;
+  background: none;
+}

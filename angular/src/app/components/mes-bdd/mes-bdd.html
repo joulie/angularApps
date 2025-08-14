@@ -1,0 +1,21 @@
+<div style="display: flex; min-height: 80vh;">
+  <!-- Sous-menu latéral -->
+  <nav style="width: 220px; border-right: 1px solid #eee; padding: 24px 0 0 24px;">
+    <h4 style="font-size: 1.1rem; font-weight: bold;">Mes BDD</h4>
+    <ul class="sous-menu-bdd">
+      <li>
+        <a routerLink="structure" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Structure</a>
+      </li>
+      <li>
+        <a routerLink="utilisateurs" routerLinkActive="active-link">Utilisateurs</a>
+      </li>
+      <li>
+        <a routerLink="données" routerLinkActive="active-link">Données</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- Contenu principal -->
+  <main style="flex: 1; padding: 32px;">
+    <router-outlet />
+  </main>
+</div>

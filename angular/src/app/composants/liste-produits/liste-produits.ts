@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Produit } from '../../services/produit';
-import { NgFor, NgClass, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-liste-produits',
   templateUrl: './liste-produits.html',
   styleUrl: './liste-produits.css',
-  imports: [NgFor, NgClass, NgIf, FormsModule],
+  imports: [NgFor, NgIf, FormsModule], 
   standalone: true
 })
 export class ListeProduits implements OnInit {

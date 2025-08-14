@@ -39,9 +39,9 @@
     {{ messageErreur }}
   </div>
 
-  <table class="table table-bordered">
-    <thead class="table-dark">
-      <tr>
+  <table class="table">
+    <thead class="card-header bg-light">
+      <tr class="table-light">
         <th>Nom</th>
         <th>Prénom</th>
         <th>Site</th>
@@ -54,7 +54,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let produit of produits; let i = index" [ngClass]="{'table-secondary': i % 2 === 0, 'table-light': i % 2 !== 0}">
+      <tr *ngFor="let produit of produits; let i = index" >
         <td class="align-middle">
           <ng-container *ngIf="ligneEnEdition === produit.id; else nomDisplay">
             <input [(ngModel)]="produit.nom" class="form-control" />

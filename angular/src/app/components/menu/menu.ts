@@ -32,15 +32,15 @@ export class Menu {
     {
       title: 'Mes liens',
       items: [
-        { label: 'GitHub', url: 'https://github.com/joulie/angularApps' }
+        { label: 'GitHub', url: 'https://github.com/joulie/' }
       ]
     },
     
     {
       title: 'Node.js',
       items: [
-        { label: 'Commandes node utiles', url: 'https://app.pluralsight.com/library/courses/nodejs-big-picture' },
-        { label: 'mes BDD du site inventaire', url: 'https://app.pluralsight.com/library/courses/nodejs-getting-started' }
+        { label: 'Commandes node utiles', routerLink: '/node-commandes' },
+        { label: 'Mes BDD', routerLink: '/mes-bdd' }
       ]
     }
   ];
