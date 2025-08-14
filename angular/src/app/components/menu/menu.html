@@ -1,0 +1,20 @@
+<nav class="sidebar-menu">
+
+  <div *ngFor="let section of sections" class="mb-4">
+    <div class="sidebar-section-title">{{ section.title }}</div>
+    <ul class="sidebar-list">
+      <li *ngFor="let item of section.items">
+        <a *ngIf="item.routerLink; else external"
+           [routerLink]="item.routerLink"
+           class="sidebar-link">
+          {{ item.label }}
+        </a>
+        <ng-template #external>
+          <a [href]="item.url" target="_blank" rel="noopener" class="sidebar-link">
+            {{ item.label }}
+          </a>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</nav>
