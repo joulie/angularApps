@@ -74,11 +74,9 @@ export class ProductList implements OnInit {
   }
 
   deleteProduct(id: number) {
-    if (confirm('Voulez-vous supprimer ce produit ?')) {
-      this.http.delete(`http://localhost:3000/products/${id}`).subscribe(() => {
-        this.products = this.products.filter(p => p.id !== id);
-      });
-    }
+    this.http.delete(`http://localhost:3000/products/${id}`).subscribe(() => {
+      this.products = this.products.filter(p => p.id !== id);
+    });
   }
 
   addProduct() {

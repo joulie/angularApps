@@ -22,10 +22,25 @@
       <input type="text" class="form-control" placeholder="Nom projet" [(ngModel)]="nom_projet" name="nom_projet">
     </div>
     <div class="col-auto">
-      <input type="text" class="form-control" placeholder="Type matériel" [(ngModel)]="type_materiel" name="type_materiel">
+      <!-- Type matériel : liste déroulante des noms de produits -->
+      <label for="typeMateriel">Type matériel</label>
+      <select id="typeMateriel"
+              class="form-control"
+              [(ngModel)]="selectedProductName"
+              name="typeMateriel"
+              (change)="selectedCode=''">
+        <option *ngFor="let name of uniqueProductNames" [value]="name">{{ name }}</option>
+      </select>
     </div>
     <div class="col-auto">
-      <input type="text" class="form-control" placeholder="Détail matériel" [(ngModel)]="detail_materiel" name="detail_materiel">
+      <!-- Détail matériel : liste déroulante des codes du produit sélectionné -->
+      <label for="detailMateriel">Détail matériel</label>
+      <select id="detailMateriel"
+              class="form-control"
+              [(ngModel)]="selectedCode"
+              name="detailMateriel">
+        <option *ngFor="let code of codesForSelectedProduct" [value]="code">{{ code }}</option>
+      </select>
     </div>
     <div class="col-auto">
       <input type="text" class="form-control" placeholder="Numéro de série" [(ngModel)]="num_serie" name="num_serie">
@@ -37,6 +52,10 @@
 
   <div *ngIf="messageErreur" class="alert alert-danger" role="alert">
     {{ messageErreur }}
+  </div>
+
+  <div class="mb-3">
+    <input type="text" class="form-control" placeholder="Filtrer..." [(ngModel)]="searchText">
   </div>
 
   <table class="table">
@@ -54,7 +73,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let produit of assignments; let i = index" >
+      <tr *ngFor="let produit of filteredAssignments; let i = index" >
         <td class="align-middle">
           <ng-container *ngIf="ligneEnEdition === produit.id; else nomDisplay">
             <input [(ngModel)]="produit.nom" class="form-control" />
@@ -109,8 +128,8 @@
             <button class="btn btn-secondary btn-sm" (click)="annulerEdition()">Annuler</button>
           </ng-container>
           <ng-template #actionsDisplay>
-            <button class="btn btn-warning btn-sm me-2" (click)="ligneEnEdition = produit.id">Modifier</button>
-            <button class="btn btn-danger btn-sm" (click)="supprimerProduit(produit.id)">Supprimer</button>
+            <button class="btn-modifier btn-sm me-2" (click)="ligneEnEdition = produit.id">Modifier</button>
+            <button class="btn-supprimer btn-sm" (click)="supprimerProduit(produit.id)">Supprimer</button>
           </ng-template>
         </td>
       </tr>

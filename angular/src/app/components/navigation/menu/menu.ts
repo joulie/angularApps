@@ -30,17 +30,17 @@ export class Menu {
     },
     
     {
-      title: 'Mes liens',
+      title: 'My links',
       items: [
         { label: 'GitHub', url: 'https://github.com/joulie/' }
       ]
     },
     
     {
-      title: 'Node.js',
+      title: 'install this software',
       items: [
-        { label: 'Commandes node utiles', routerLink: '/node-commandes' },
-        { label: 'Mes BDD', routerLink: '/mes-bdd' }
+        { label: 'Usefull commands', routerLink: '/node-commandes' },
+        { label: 'My databases', routerLink: '/mes-bdd' }
       ]
     }
   ];
