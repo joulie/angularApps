@@ -1,1 +1,23 @@
-<p>mes-bdd-utilisateurs works!</p>
+<pre>
+WSL init angular 
+    mkdir ~/.npm-global
+    npm config set prefix '~/.npm-global'
+    echo 'export PATH=$PATH:~/.npm-global/bin' >> ~/.bashrc
+    source ~/.bashrc
+    npm install -g @angular/cli
+    ng version
+
+GIT
+    git config --global user.name "monNom"
+    git config --global user.email "monMail"
+    git config --list
+    pour ne pas avoir à taper le mdp trop svt :
+    git config --global credential.helper cache
+    git config --global credential.helper 'cache --timeout=36000000'
+
+
+au DL du projet
+    npm install
+    npm start
+
+</pre>
