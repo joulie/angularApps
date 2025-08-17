@@ -1,1 +1,144 @@
-<p>mes-bdd-donnees works!</p>
+<style>
+    .guide-container {
+        width: 100%;
+        max-width: 100vw;
+        margin: 0;
+        background: #fff;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 32px 2vw;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        box-sizing: border-box;
+    }
+    .guide-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #2d3a4b;
+        margin-bottom: 32px;
+        text-align: center;
+    }
+    .guide-section {
+        margin-bottom: 32px;
+        padding: 24px 18px 18px 18px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border-left: 5px solid #007acc;
+        position: relative;
+    }
+    .guide-section h2 {
+        font-size: 1.3rem;
+        color: #007acc;
+        margin-bottom: 12px;
+        font-weight: 600;
+    }
+    .guide-section .step {
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #444;
+    }
+    .guide-section pre {
+        background: #23272e;
+        color: #e6e6e6;
+        border-radius: 6px;
+        padding: 14px 12px;
+        font-size: 1em;
+        margin: 10px 0 0 0;
+        overflow-x: auto;
+    }
+    .copy-btn {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        background: #007acc;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 14px;
+        font-size: 0.95em;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .copy-btn:hover {
+        background: #005f99;
+    }
+</style>
+
+<div class="guide-container">
+    <div class="guide-title">Guide WSL, Node.js, Angular, VS Code & Git</div>
+
+        <div class="guide-section">
+            <h2>1. Installer Node.js et Angular sur WSL</h2>
+            <div class="step">Mettez à jour le système et installez Node.js, nvm et Angular CLI :</div>
+            <button class="copy-btn" (click)="copyToClipboard(code1)">Copier</button>
+            <pre #code1># Mettre à jour le système
+sudo apt update && sudo apt upgrade -y
+
+# Installer nvm (Node Version Manager)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.6/install.sh | bash
+
+# Charger nvm
+export NVM_DIR="$([ -z "{{ '{' }}XDG_CONFIG_HOME-{{ '}' }}" ] && printf %s "{{ '{' }}HOME{{ '}' }}/.nvm" || printf %s "{{ '{' }}XDG_CONFIG_HOME{{ '}' }}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Installer Node.js LTS
+nvm install --lts
+
+# Vérifier Node.js et npm
+node -v
+npm -v
+
+# Installer Angular CLI
+npm install -g @angular/cli
+
+# Vérifier Angular CLI
+ng version
+
+# Créer un projet Angular
+ng new mon-projet
+cd mon-projet
+ng serve
+        </pre>
+    </div>
+
+        <div class="guide-section">
+            <h2>2. Ouvrir un projet Angular dans VS Code</h2>
+            <div class="step">Ouvrez votre projet dans VS Code depuis WSL :</div>
+            <button class="copy-btn" (click)="copyToClipboard(code2)">Copier</button>
+            <pre #code2># Depuis WSL, naviguer dans le projet
+cd ~/mon-projet
+
+# Ouvrir le projet dans VS Code
+code .
+
+# Assurez-vous d'avoir installé l'extension "Remote - WSL" dans VS Code
+        </pre>
+    </div>
+
+        <div class="guide-section">
+            <h2>3. Connecter VS Code à Git</h2>
+            <div class="step">Configurez Git et connectez-le à GitHub/GitLab :</div>
+            <button class="copy-btn" (click)="copyToClipboard(code3)">Copier</button>
+            <pre #code3># Vérifier Git
+git --version
+
+# Installer Git si nécessaire
+sudo apt install git -y
+
+# Configurer identité Git
+git config --global user.name "TonNom"
+git config --global user.email "tonemail@example.com"
+
+# Générer une clé SSH
+ssh-keygen -t ed25519 -C "tonemail@example.com"
+cat ~/.ssh/id_ed25519.pub  # Copier cette clé dans GitHub/GitLab
+
+# Tester la connexion SSH
+ssh -T git@github.com
+
+# Cloner un dépôt
+git clone git@github.com:username/nom-du-repo.git
+cd nom-du-repo
+code .
+        </pre>
+    </div>
+</div>

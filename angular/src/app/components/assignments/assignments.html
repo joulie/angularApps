@@ -5,7 +5,7 @@
     {{ afficherForm ? 'Annuler' : 'Ajouter un produit' }}
   </button>
 
-  <form *ngIf="afficherForm" (ngSubmit)="ajouterProduit()" class="mb-4 row g-2 align-items-end">
+  <form *ngIf="afficherForm" (ngSubmit)="ajouterAssignement()" class="mb-4 row g-2 align-items-end">
     <div class="col-auto">
       <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="nom" name="nom" >
     </div>
@@ -129,7 +129,7 @@
           </ng-container>
           <ng-template #actionsDisplay>
             <button class="btn-modifier btn-sm me-2" (click)="ligneEnEdition = produit.id">Modifier</button>
-            <button class="btn-supprimer btn-sm" (click)="supprimerProduit(produit.id)">Supprimer</button>
+            <button class="btn-supprimer btn-sm" (click)="supprimerAssignement(produit.id)">Supprimer</button>
           </ng-template>
         </td>
       </tr>
