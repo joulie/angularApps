@@ -7,6 +7,86 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Récupérer tous les assignments
+app.get('/assignments', (req, res) => {
+  db.query('SELECT * FROM assignments', (err, results) => {
+    if (err) {
+      res.status(500).send('Erreur serveur');
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+// Ajouter un assignment
+app.post('/assignments', (req, res) => {
+  const {
+    nom,
+    prenom,
+    site,
+    code_projet,
+    nom_projet,
+    type_materiel,
+    detail_materiel,
+    num_serie
+  } = req.body;
+
+  db.query(
+    `INSERT INTO assignments 
+      (nom, prenom, site, code_projet, nom_projet, type_materiel, detail_materiel, num_serie) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [nom, prenom, site, code_projet, nom_projet, type_materiel, detail_materiel, num_serie],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({ message: 'Erreur serveur' });
+      } else {
+        res.status(201).json({ message: 'Assignment ajouté', id: result.insertId });
+      }
+    }
+  );
+});
+
+// Modifier un assignment
+app.put('/assignments/:id', (req, res) => {
+  const id = req.params.id;
+  const {
+    nom,
+    prenom,
+    site,
+    code_projet,
+    nom_projet,
+    type_materiel,
+    detail_materiel,
+    num_serie
+  } = req.body;
+
+  db.query(
+    `UPDATE assignments SET nom=?, prenom=?, site=?, code_projet=?, nom_projet=?, type_materiel=?, detail_materiel=?, num_serie=? WHERE id=?`,
+    [nom, prenom, site, code_projet, nom_projet, type_materiel, detail_materiel, num_serie, id],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({ message: 'Erreur serveur' });
+      } else {
+        res.status(200).json({ message: 'Assignment modifié' });
+      }
+    }
+  );
+});
+
+// Supprimer un assignment
+app.delete('/assignments/:id', (req, res) => {
+  const id = req.params.id;
+  db.query('DELETE FROM assignments WHERE id = ?', [id], (err, result) => {
+    if (err) {
+      res.status(500).json({ message: 'Erreur serveur' });
+    } else if (result.affectedRows === 0) {
+      res.status(404).json({ message: 'Assignment non trouvé' });
+    } else {
+      res.status(200).json({ message: 'Assignment supprimé' });
+    }
+  });
+});
+
 // Récupérer tous les produits
 app.get('/produits', (req, res) => {
   db.query('SELECT * FROM produits', (err, results) => {
@@ -169,6 +249,34 @@ app.post('/products', (req, res) => {
         res.status(500).json({ message: 'Erreur serveur' });
       } else {
         res.status(201).json({ message: 'Produit ajouté', id: result.insertId });
+      }
+    }
+  );
+});
+
+// Ajouter un assignment
+app.post('/assignments', (req, res) => {
+  const {
+    nom,
+    prenom,
+    site,
+    code_projet,
+    nom_projet,
+    type_materiel,
+    detail_materiel,
+    num_serie
+  } = req.body;
+
+  db.query(
+    `INSERT INTO assignments 
+      (nom, prenom, site, code_projet, nom_projet, type_materiel, detail_materiel, num_serie) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [nom, prenom, site, code_projet, nom_projet, type_materiel, detail_materiel, num_serie],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({ message: 'Erreur serveur' });
+      } else {
+        res.status(201).json({ message: 'Assignment ajouté', id: result.insertId });
       }
     }
   );
