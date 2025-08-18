@@ -43,7 +43,7 @@
           <input class="form-control" type="number" [(ngModel)]="newProduct.price" placeholder="Price">
         </div>
         <div class="col">
-          <input class="form-control" type="number" step="0.1" [(ngModel)]="newProduct.rating" placeholder="Rating">
+          <input class="form-control" type="number" step="0.1" min ="0" max="5" [(ngModel)]="newProduct.rating" placeholder="Rating">
         </div>
         <div class="col">
           <input class="form-control" [(ngModel)]="newProduct.image" placeholder="Image URL">

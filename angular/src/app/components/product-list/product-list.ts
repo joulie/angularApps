@@ -56,9 +56,15 @@ export class ProductList implements OnInit {
   }
 
   saveEdit(id: number) {
+    if (
+      this.editCache.rating !== null &&
+      (this.editCache.rating < 0 || this.editCache.rating > 5)
+    ) {
+      alert('La note doit être comprise entre 1 et 5');
+      return;
+    }
     this.http.put(`http://localhost:3000/products/${id}`, this.editCache)
       .subscribe(() => {
-        // Mets à jour le tableau localement
         const idx = this.products.findIndex(p => p.id === id);
         if (idx !== -1) {
           this.products[idx] = { ...this.editCache };
@@ -80,16 +86,20 @@ export class ProductList implements OnInit {
   }
 
   addProduct() {
-    // Optionnel : vérifie que le nom est renseigné
     if (!this.newProduct.productName) {
       alert('Le nom du produit est obligatoire');
       return;
     }
+    if (
+      this.newProduct.rating !== null &&
+      (this.newProduct.rating < 0|| this.newProduct.rating > 5)
+    ) {
+      alert('La note doit être comprise entre 0 et 5');
+      return;
+    }
     this.http.post('http://localhost:3000/products', this.newProduct)
       .subscribe((res: any) => {
-        // Ajoute le produit à la liste locale (avec l'id retourné)
         this.products.push({ ...this.newProduct, id: res.id });
-        // Réinitialise le formulaire
         this.newProduct = {
           productName: '',
           code: '',
