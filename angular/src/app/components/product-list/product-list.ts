@@ -60,7 +60,7 @@ export class ProductList implements OnInit {
       this.editCache.rating !== null &&
       (this.editCache.rating < 0 || this.editCache.rating > 5)
     ) {
-      alert('La note doit être comprise entre 1 et 5');
+      alert('La note doit être comprise entre 0 et 5');
       return;
     }
     this.http.put(`http://localhost:3000/products/${id}`, this.editCache)
