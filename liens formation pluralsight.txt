@@ -1,0 +1,17 @@
+Angular
+o   big picture : https://app.pluralsight.com/library/courses/ng-big-picture
+o   get starting : https://app.pluralsight.com/library/courses/angular-2-getting-started-update
+o   angular CLI : https://app.pluralsight.com/library/courses/angular-cli/table-of-contents
+o   unit test : https://app.pluralsight.com/library/courses/unit-testing-angular
+RxJS with Angular
+    https://app.pluralsight.com/library/courses/rxjs-angular-reactive-development/table-of-contents
+    Ngrx with Angular
+    https://app.pluralsight.com/library/courses/angular-ngrx-getting-started/table-of-contents  
+Typescript
+    big picture : https://app.pluralsight.com/library/courses/typescript-big-picture
+    get starting : https://app.pluralsight.com/library/courses/getting-started-typescript
+    async code with typescript : https://app.pluralsight.com/library/courses/typescript-asynchronous-code/table-of-contents
+Node.js
+    big picture : https://app.pluralsight.com/library/courses/nodejs-big-picture
+    get starting : https://app.pluralsight.com/library/courses/nodejs-getting-started
+
