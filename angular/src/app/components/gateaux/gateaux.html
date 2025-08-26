@@ -9,3 +9,11 @@
 		</div>
 	</div>
 </div>
+
+<div class="popin-backdrop" *ngIf="popinVisible" (click)="fermerPopin()">
+	<div class="popin" (click)="$event.stopPropagation()">
+		<img [src]="popinGateau?.image" [alt]="popinGateau?.nom" class="popin-img" />
+		<div class="popin-nom">{{ popinGateau?.nom }}</div>
+		<button class="popin-close" (click)="fermerPopin()">Fermer</button>
+	</div>
+</div>
