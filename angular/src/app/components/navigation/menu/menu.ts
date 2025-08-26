@@ -25,7 +25,8 @@ export class Menu {
       title: 'Inventaire',
       items: [
         { label: 'Product-list', routerLink: '/product-list' },
-        { label: 'Assignments', routerLink: '/assignments' }
+        { label: 'Assignments', routerLink: '/assignments' },
+        { label: 'Gateaux', routerLink: '/gateaux' }
       ]
     },
     

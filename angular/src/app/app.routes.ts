@@ -8,6 +8,7 @@ import { MesBddStructure } from './components/navigation/menu/underMenu/mes-bdd/
 import { MesBddUtilisateurs } from './components/navigation/menu/underMenu/mes-bdd/mes-bdd-utilisateurs/mes-bdd-utilisateurs';
 import { MesBddDonnees } from './components/navigation/menu/underMenu/mes-bdd/mes-bdd-donnees/mes-bdd-donnees';
 import { LoginComponent } from './components/login/login.component';
+import { Gateaux } from './components/gateaux/gateaux';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'assignments', pathMatch: 'full' },
   { path: 'assignments', component: Assignments, canActivate: [authGuard] },
   { path: 'product-list', component: ProductList, canActivate: [authGuard] },
+  { path: 'gateaux', component: Gateaux, canActivate: [authGuard] },
   { path: 'menu', component: Menu, canActivate: [authGuard] },
   { path: 'node-commandes', component: NodeCommandes, canActivate: [authGuard] },
   {

@@ -1,0 +1,11 @@
+
+<div class="gateaux-container">
+	<h2>Nos pâtisseries à vendre</h2>
+	<div class="gateaux-grid">
+		<div class="gateau-item" *ngFor="let patisserie of patisseries">
+			<img [src]="patisserie.image" [alt]="patisserie.nom" />
+			<div class="gateau-nom">{{ patisserie.nom }}</div>
+			<button (click)="selectionner(patisserie.nom)">Sélectionner</button>
+		</div>
+	</div>
+</div>

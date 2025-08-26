@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-assignments',
   templateUrl: './assignments.html',
   styleUrl: './assignments.css',
-  imports: [NgFor, NgIf, FormsModule], 
+  imports: [NgFor, NgIf, FormsModule],
   standalone: true
 })
 export class Assignments implements OnInit {
@@ -34,16 +34,16 @@ export class Assignments implements OnInit {
   products: any[] | undefined;
 
   constructor(private assignmentservice: Produit,
-  private http: HttpClient
-  ) {}
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
     this.assignmentservice.getAssignments().subscribe(data => {
       this.assignments = data;
     });
     this.http.get<any[]>('http://localhost:3000/products').subscribe(data => {
-        this.products = data;
-        console.log('products:', this.products);
+      this.products = data;
+      console.log('products:', this.products);
     });
   }
 
